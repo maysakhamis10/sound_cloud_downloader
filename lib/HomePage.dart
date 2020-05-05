@@ -17,17 +17,17 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   PermissionStatus _permissionStatus = PermissionStatus.undetermined;
-  SoundCloud track;
+  SoundCloudModel track;
   bool _allowWriteFile = false;
   final String url = "https://api.soundcloud.com/resolve.json?url=";
-  final String clientID = "client_id=a549b13e0494aaec74fed484d567153b";
+  final String clientID = "client_id=5a9981e3f724ceb3e00d929cf4d09bb6";
   bool isFetching = false;
   bool isDownloading = false;
   String link = "";
   String trackTitle = "";
   String format = "";
   String status = "";
-  String  _trackURL = "https://soundcloud.com/user-869590724/talk-to-animals-sentra-remix";
+  String  _trackURL = "https://soundcloud.com/alhabibali/sets/almoreed3";
   String progress = "";
 
 
@@ -35,25 +35,33 @@ class _HomePageState extends State<HomePage> {
 
   //Get Track Information--------------------
   Future<void> _getURI() async {
+    Tracks test  = new Tracks();
+
     try {
       setState(() {
         isFetching = true;
       });
       http.Response response =
           await http.get("${url}${_trackURL}&${clientID}");
+      print('${url}${_trackURL}&${clientID}');
       var body = response.body;
       var decodeJson = jsonDecode(body);
-      track = SoundCloud.fromJson(decodeJson);
-      print('track ${track.id}');
+      track = SoundCloudModel.fromJson(decodeJson);
+      print('track ${track}');
 
 
+      for(int i = 0 ; i < track.tracks.length ; i ++){
+//        if(track.tracks[i].id == track.id){
+      test = track.tracks[i];
+//        }
+      }
 
       setState(() {
         isFetching = false;
         status = "Fetching Done .. Wait For Downaloding";
-        link = "https://api.soundcloud.com/tracks/259412502/stream/?$clientID";
-        trackTitle = track.title;
-        format = ".${track.originalFormat}";
+        link = "https://api.soundcloud.com/tracks/${test.id}/stream/?$clientID";
+        trackTitle = test.title;
+        format = ".${test.originalFormat}";
       });
 
       await downloadTrack(link, trackTitle, format);

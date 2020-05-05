@@ -1,4 +1,158 @@
-class SoundCloud {
+class SoundCloudModel {
+  int duration;
+  Null releaseDay;
+  String permalinkUrl;
+  String genre;
+  String permalink;
+  Null purchaseUrl;
+  Null releaseMonth;
+  String description;
+  String uri;
+  Null labelName;
+  String tagList;
+  Null releaseYear;
+  int trackCount;
+  int userId;
+  String lastModified;
+  String license;
+  List<Tracks> tracks;
+  Null playlistType;
+  int id;
+  Null downloadable;
+  String sharing;
+  String createdAt;
+  Null release;
+  String kind;
+  String title;
+  Null type;
+  Null purchaseTitle;
+  String artworkUrl;
+  Null ean;
+  bool streamable;
+  User user;
+  String embeddableBy;
+  Null labelId;
+
+  SoundCloudModel(
+      {this.duration,
+        this.releaseDay,
+        this.permalinkUrl,
+        this.genre,
+        this.permalink,
+        this.purchaseUrl,
+        this.releaseMonth,
+        this.description,
+        this.uri,
+        this.labelName,
+        this.tagList,
+        this.releaseYear,
+        this.trackCount,
+        this.userId,
+        this.lastModified,
+        this.license,
+        this.tracks,
+        this.playlistType,
+        this.id,
+        this.downloadable,
+        this.sharing,
+        this.createdAt,
+        this.release,
+        this.kind,
+        this.title,
+        this.type,
+        this.purchaseTitle,
+        this.artworkUrl,
+        this.ean,
+        this.streamable,
+        this.user,
+        this.embeddableBy,
+        this.labelId});
+
+  SoundCloudModel.fromJson(Map<String, dynamic> json) {
+    duration = json['duration'];
+    releaseDay = json['release_day'];
+    permalinkUrl = json['permalink_url'];
+    genre = json['genre'];
+    permalink = json['permalink'];
+    purchaseUrl = json['purchase_url'];
+    releaseMonth = json['release_month'];
+    description = json['description'];
+    uri = json['uri'];
+    labelName = json['label_name'];
+    tagList = json['tag_list'];
+    releaseYear = json['release_year'];
+    trackCount = json['track_count'];
+    userId = json['user_id'];
+    lastModified = json['last_modified'];
+    license = json['license'];
+    if (json['tracks'] != null) {
+      tracks = new List<Tracks>();
+      json['tracks'].forEach((v) {
+        tracks.add(new Tracks.fromJson(v));
+      });
+    }
+    playlistType = json['playlist_type'];
+    id = json['id'];
+    downloadable = json['downloadable'];
+    sharing = json['sharing'];
+    createdAt = json['created_at'];
+    release = json['release'];
+    kind = json['kind'];
+    title = json['title'];
+    type = json['type'];
+    purchaseTitle = json['purchase_title'];
+    artworkUrl = json['artwork_url'];
+    ean = json['ean'];
+    streamable = json['streamable'];
+    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    embeddableBy = json['embeddable_by'];
+    labelId = json['label_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['duration'] = this.duration;
+    data['release_day'] = this.releaseDay;
+    data['permalink_url'] = this.permalinkUrl;
+    data['genre'] = this.genre;
+    data['permalink'] = this.permalink;
+    data['purchase_url'] = this.purchaseUrl;
+    data['release_month'] = this.releaseMonth;
+    data['description'] = this.description;
+    data['uri'] = this.uri;
+    data['label_name'] = this.labelName;
+    data['tag_list'] = this.tagList;
+    data['release_year'] = this.releaseYear;
+    data['track_count'] = this.trackCount;
+    data['user_id'] = this.userId;
+    data['last_modified'] = this.lastModified;
+    data['license'] = this.license;
+    if (this.tracks != null) {
+      data['tracks'] = this.tracks.map((v) => v.toJson()).toList();
+    }
+    data['playlist_type'] = this.playlistType;
+    data['id'] = this.id;
+    data['downloadable'] = this.downloadable;
+    data['sharing'] = this.sharing;
+    data['created_at'] = this.createdAt;
+    data['release'] = this.release;
+    data['kind'] = this.kind;
+    data['title'] = this.title;
+    data['type'] = this.type;
+    data['purchase_title'] = this.purchaseTitle;
+    data['artwork_url'] = this.artworkUrl;
+    data['ean'] = this.ean;
+    data['streamable'] = this.streamable;
+    if (this.user != null) {
+      data['user'] = this.user.toJson();
+    }
+    data['embeddable_by'] = this.embeddableBy;
+    data['label_id'] = this.labelId;
+    return data;
+  }
+}
+
+class Tracks {
   String kind;
   int id;
   String createdAt;
@@ -13,9 +167,10 @@ class SoundCloud {
   String permalink;
   bool streamable;
   String embeddableBy;
+  bool downloadable;
   Null purchaseUrl;
-  Null purchaseTitle;
   Null labelId;
+  Null purchaseTitle;
   String genre;
   String title;
   String description;
@@ -35,66 +190,61 @@ class SoundCloud {
   User user;
   String permalinkUrl;
   String artworkUrl;
+  String waveformUrl;
   String streamUrl;
-  String downloadUrl;
   int playbackCount;
   int downloadCount;
   int favoritingsCount;
-  int repostsCount;
   int commentCount;
-  bool downloadable;
-  String waveformUrl;
-  String attachmentsUri;
+  String downloadUrl;
 
-  SoundCloud(
+  Tracks(
       {this.kind,
-      this.id,
-      this.createdAt,
-      this.userId,
-      this.duration,
-      this.commentable,
-      this.state,
-      this.originalContentSize,
-      this.lastModified,
-      this.sharing,
-      this.tagList,
-      this.permalink,
-      this.streamable,
-      this.embeddableBy,
-      this.purchaseUrl,
-      this.purchaseTitle,
-      this.labelId,
-      this.genre,
-      this.title,
-      this.description,
-      this.labelName,
-      this.release,
-      this.trackType,
-      this.keySignature,
-      this.isrc,
-      this.videoUrl,
-      this.bpm,
-      this.releaseYear,
-      this.releaseMonth,
-      this.releaseDay,
-      this.originalFormat,
-      this.license,
-      this.uri,
-      this.user,
-      this.permalinkUrl,
-      this.artworkUrl,
-      this.streamUrl,
-      this.downloadUrl,
-      this.playbackCount,
-      this.downloadCount,
-      this.favoritingsCount,
-      this.repostsCount,
-      this.commentCount,
-      this.downloadable,
-      this.waveformUrl,
-      this.attachmentsUri});
+        this.id,
+        this.createdAt,
+        this.userId,
+        this.duration,
+        this.commentable,
+        this.state,
+        this.originalContentSize,
+        this.lastModified,
+        this.sharing,
+        this.tagList,
+        this.permalink,
+        this.streamable,
+        this.embeddableBy,
+        this.downloadable,
+        this.purchaseUrl,
+        this.labelId,
+        this.purchaseTitle,
+        this.genre,
+        this.title,
+        this.description,
+        this.labelName,
+        this.release,
+        this.trackType,
+        this.keySignature,
+        this.isrc,
+        this.videoUrl,
+        this.bpm,
+        this.releaseYear,
+        this.releaseMonth,
+        this.releaseDay,
+        this.originalFormat,
+        this.license,
+        this.uri,
+        this.user,
+        this.permalinkUrl,
+        this.artworkUrl,
+        this.waveformUrl,
+        this.streamUrl,
+        this.playbackCount,
+        this.downloadCount,
+        this.favoritingsCount,
+        this.commentCount,
+        this.downloadUrl});
 
-  SoundCloud.fromJson(Map<String, dynamic> json) {
+  Tracks.fromJson(Map<String, dynamic> json) {
     kind = json['kind'];
     id = json['id'];
     createdAt = json['created_at'];
@@ -109,9 +259,10 @@ class SoundCloud {
     permalink = json['permalink'];
     streamable = json['streamable'];
     embeddableBy = json['embeddable_by'];
+    downloadable = json['downloadable'];
     purchaseUrl = json['purchase_url'];
-    purchaseTitle = json['purchase_title'];
     labelId = json['label_id'];
+    purchaseTitle = json['purchase_title'];
     genre = json['genre'];
     title = json['title'];
     description = json['description'];
@@ -131,16 +282,13 @@ class SoundCloud {
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     permalinkUrl = json['permalink_url'];
     artworkUrl = json['artwork_url'];
+    waveformUrl = json['waveform_url'];
     streamUrl = json['stream_url'];
-    downloadUrl = json['download_url'];
     playbackCount = json['playback_count'];
     downloadCount = json['download_count'];
     favoritingsCount = json['favoritings_count'];
-    repostsCount = json['reposts_count'];
     commentCount = json['comment_count'];
-    downloadable = json['downloadable'];
-    waveformUrl = json['waveform_url'];
-    attachmentsUri = json['attachments_uri'];
+    downloadUrl = json['download_url'];
   }
 
   Map<String, dynamic> toJson() {
@@ -159,9 +307,10 @@ class SoundCloud {
     data['permalink'] = this.permalink;
     data['streamable'] = this.streamable;
     data['embeddable_by'] = this.embeddableBy;
+    data['downloadable'] = this.downloadable;
     data['purchase_url'] = this.purchaseUrl;
-    data['purchase_title'] = this.purchaseTitle;
     data['label_id'] = this.labelId;
+    data['purchase_title'] = this.purchaseTitle;
     data['genre'] = this.genre;
     data['title'] = this.title;
     data['description'] = this.description;
@@ -183,16 +332,13 @@ class SoundCloud {
     }
     data['permalink_url'] = this.permalinkUrl;
     data['artwork_url'] = this.artworkUrl;
+    data['waveform_url'] = this.waveformUrl;
     data['stream_url'] = this.streamUrl;
-    data['download_url'] = this.downloadUrl;
     data['playback_count'] = this.playbackCount;
     data['download_count'] = this.downloadCount;
     data['favoritings_count'] = this.favoritingsCount;
-    data['reposts_count'] = this.repostsCount;
     data['comment_count'] = this.commentCount;
-    data['downloadable'] = this.downloadable;
-    data['waveform_url'] = this.waveformUrl;
-    data['attachments_uri'] = this.attachmentsUri;
+    data['download_url'] = this.downloadUrl;
     return data;
   }
 }
@@ -209,13 +355,13 @@ class User {
 
   User(
       {this.id,
-      this.kind,
-      this.permalink,
-      this.username,
-      this.lastModified,
-      this.uri,
-      this.permalinkUrl,
-      this.avatarUrl});
+        this.kind,
+        this.permalink,
+        this.username,
+        this.lastModified,
+        this.uri,
+        this.permalinkUrl,
+        this.avatarUrl});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
