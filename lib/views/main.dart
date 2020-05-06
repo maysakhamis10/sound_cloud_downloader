@@ -3,6 +3,8 @@ import 'HomePage.dart';
 
 void main() => runApp(MyApp());
 
+var test = "https://api.soundcloud.com/resolve.json?url=https://soundcloud.com/alhabibali/sets/almoreed3&client_id=5a9981e3f724ceb3e00d929cf4d09bb6";
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -17,25 +19,5 @@ class MyApp extends StatelessWidget {
     );
   }
 
-
-//  return new MaterialApp(
-//  initialRoute: '/',
-//  routes: {
-//  // When navigating to the "/" route, build the FirstScreen widget.
-//  '/': (context) =>
-//  BlocProvider(
-//  create: (context) =>
-//  CharBloc(httpClient: http.Client())
-//  ..add(Fetch()),
-//  child: HomePage(),
-//  ),
-//  // When navigating to the "/second" route, build the SecondScreen widget.
-//  'Details': (context) => BlocProvider(
-//  create: (context) =>
-//  DetailsBloc(httpClient: http.Client())..add(Fetch()),
-//  child: Details(),
-//  )
-//  }
-//  );
 }
 
